@@ -11,16 +11,18 @@
 body{
   font-family:'Segoe UI';
   margin:0;
-  overflow-x:hidden;
+  background:#0f1115;
+  color:white;
   scroll-behavior:smooth;
 }
 
 /* NAVBAR */
 .navbar{
-  background:#1f2125;
-  padding:15px;
   position:fixed;
   width:100%;
+  padding:15px;
+  backdrop-filter: blur(10px);
+  background: rgba(20,20,20,0.6);
   display:flex;
   justify-content:center;
   gap:40px;
@@ -34,15 +36,14 @@ body{
   position:relative;
 }
 
-/* hover underline animation */
 .navbar a::after{
   content:'';
-  width:0;
-  height:2px;
-  background:#ff4d5a;
   position:absolute;
+  width:0%;
+  height:2px;
   left:0;
   bottom:-5px;
+  background:#ff4d5a;
   transition:0.3s;
 }
 
@@ -53,51 +54,49 @@ body{
 /* HERO */
 .hero{
   height:100vh;
-  background:linear-gradient(135deg,#2c2f36,#1f2125);
-  color:white;
   display:flex;
   align-items:center;
   justify-content:center;
   flex-direction:column;
   text-align:center;
+  background: radial-gradient(circle at top,#1a1d23,#0f1115);
 }
 
 .hero h1{
   font-size:60px;
-  animation:fadeIn 1.2s ease;
+  animation:fadeDown 1s ease;
 }
 
 .hero span{
   color:#ff4d5a;
 }
 
-/* typing */
-.typing{
-  margin-top:10px;
-  font-size:22px;
-  opacity:0;
-  animation:fadeIn 2s forwards;
+@keyframes fadeDown{
+  from{opacity:0;transform:translateY(-40px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
-/* button */
+/* TYPING TEXT */
+.typing{
+  font-size:22px;
+  margin-top:10px;
+  color:#aaa;
+  height:30px;
+}
+
+/* BUTTON */
 .btn-main{
   border:2px solid #ff4d5a;
   padding:10px 25px;
   color:white;
   text-decoration:none;
-  margin-top:20px;
+  margin-top:25px;
   transition:0.3s;
 }
 
 .btn-main:hover{
   background:#ff4d5a;
-  transform:scale(1.05);
-}
-
-/* animation */
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(-20px);}
-  to{opacity:1; transform:translateY(0);}
+  box-shadow:0 0 20px #ff4d5a;
 }
 
 /* SECTION */
@@ -105,7 +104,7 @@ body{
   padding:100px 0;
   text-align:center;
   opacity:0;
-  transform:translateY(50px);
+  transform:translateY(60px);
   transition:1s;
 }
 
@@ -121,31 +120,26 @@ body{
 /* ABOUT */
 .about img{
   width:250px;
-  border-radius:10px;
-  transition:0.3s;
+  border-radius:15px;
+  transition:0.4s;
 }
 
 .about img:hover{
-  transform:scale(1.05);
+  transform:scale(1.08);
 }
 
-/* PROJECT */
+/* PROJECT CARD */
 .card-box{
-  background:#2c2f36;
-  color:white;
+  background:linear-gradient(145deg,#1a1d23,#111);
   padding:30px;
   border-radius:15px;
-  transition:0.3s;
+  transition:0.4s;
+  border:1px solid rgba(255,255,255,0.05);
 }
 
 .card-box:hover{
   transform:translateY(-10px) scale(1.03);
-  box-shadow:0 10px 30px rgba(0,0,0,0.3);
-}
-
-.card-box a{
-  color:#ff4d5a;
-  text-decoration:none;
+  box-shadow:0 0 25px rgba(255,77,90,0.4);
 }
 
 /* CONTACT */
@@ -154,33 +148,27 @@ body{
   justify-content:center;
   gap:30px;
   flex-wrap:wrap;
-  margin-top:40px;
 }
 
 .contact-card{
-  background:white;
+  background:#111;
   padding:30px;
   width:260px;
   border-radius:15px;
-  box-shadow:0 5px 20px rgba(0,0,0,0.1);
-  transition:0.3s;
+  transition:0.4s;
 }
 
 .contact-card:hover{
   transform:translateY(-10px);
-}
-
-.contact-card a{
-  text-decoration:none;
-  color:#333;
+  box-shadow:0 0 20px rgba(255,77,90,0.4);
 }
 
 /* FOOTER */
 .footer{
-  background:#1f2125;
-  color:white;
-  text-align:center;
+  background:#111;
   padding:20px;
+  text-align:center;
+  color:#aaa;
 }
 </style>
 </head>
@@ -198,24 +186,25 @@ body{
 <!-- HERO -->
 <section class="hero">
   <h1>Hello,<br>My Name is <span>Toffick Ahamed</span></h1>
-  <h3 class="typing">I build AI & Web Solutions</h3>
+  <h3 class="typing" id="typing"></h3>
   <a href="#projects" class="btn-main">VIEW PROJECTS</a>
 </section>
 
 <!-- ABOUT -->
 <section id="about" class="section about">
   <h2>ABOUT <span>ME</span></h2>
-  <div class="container mt-4">
+
+  <div class="container mt-5">
     <div class="row align-items-center">
       <div class="col-md-4">
         <img src="profile.jpg">
       </div>
+
       <div class="col-md-8 text-start">
         <h4>Software Developer</h4>
         <p>
-        Final year B.Tech CSE student skilled in Python, Java, MySQL & C. 
-        Built AI-based projects like Resume Analyzer & Job Matcher. 
-        Currently seeking internship opportunities.
+        Final year B.Tech CSE student skilled in Python, Java, MySQL & AI.
+        Passionate about building real-world projects like Resume Analyzer & Job Matcher.
         </p>
 
         <a href="resume.pdf" class="btn btn-danger">Download Resume</a>
@@ -224,7 +213,7 @@ body{
   </div>
 </section>
 
-<!-- PROJECTS -->
+<!-- PROJECT -->
 <section id="projects" class="section">
   <h2>RECENT <span>PROJECTS</span></h2>
 
@@ -234,8 +223,7 @@ body{
       <div class="col-md-6 mb-4">
         <div class="card-box">
           <h4>AI Resume Analyzer</h4>
-          <p>Analyzes resumes using AI techniques.</p>
-          <a href="https://github.com/ahmedtoffick45-13" target="_blank">View Project</a>
+          <p>AI-based resume analysis system.</p>
         </div>
       </div>
 
@@ -243,7 +231,6 @@ body{
         <div class="card-box">
           <h4>Job Matcher</h4>
           <p>Smart job recommendation system.</p>
-          <a href="https://github.com/ahmedtoffick45-13" target="_blank">View Project</a>
         </div>
       </div>
 
@@ -252,29 +239,24 @@ body{
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="section" style="background:#f5f5f5;">
+<section id="contact" class="section">
   <h2>CONTACT <span>INFO</span></h2>
 
-  <div class="contact-container">
+  <div class="contact-container mt-5">
 
     <div class="contact-card">
       <h4>📞 Phone</h4>
-      <p><a href="tel:+919774917317">+91 9774917317</a></p>
+      <p>+91 9774917317</p>
     </div>
 
     <div class="contact-card">
       <h4>📧 Email</h4>
-      <p><a href="mailto:ahmedtoffick45@gmail.com">ahmedtoffick45@gmail.com</a></p>
-    </div>
-
-    <div class="contact-card">
-      <h4>🔗 LinkedIn</h4>
-      <p><a href="https://www.linkedin.com/in/toffick-ahamed-4595a32a2" target="_blank">View Profile</a></p>
+      <p>ahmedtoffick45@gmail.com</p>
     </div>
 
     <div class="contact-card">
       <h4>💻 GitHub</h4>
-      <p><a href="https://github.com/ahmedtoffick45-13" target="_blank">View Profile</a></p>
+      <p>github.com/ahmedtoffick45-13</p>
     </div>
 
   </div>
@@ -282,26 +264,55 @@ body{
 
 <!-- FOOTER -->
 <div class="footer">
-  © 2026 Toffick Ahamed | Portfolio
+  © 2026 Toffick Ahamed | All Rights Reserved
 </div>
 
-<!-- SCRIPT -->
+<!-- JS -->
 <script>
+// SCROLL ANIMATION
 const sections = document.querySelectorAll('.section');
-
 window.addEventListener('scroll', () => {
   sections.forEach(sec => {
-    const top = window.scrollY;
     const offset = sec.offsetTop - 400;
-
-    if(top > offset){
+    if(window.scrollY > offset){
       sec.classList.add('show');
     }
   });
 });
+
+// TYPING EFFECT
+const texts = ["I build AI Projects", "Web Developer", "Python Developer"];
+let i=0, j=0;
+let currentText = "";
+let isDeleting = false;
+
+function type(){
+  if(i < texts.length){
+    if(!isDeleting && j <= texts[i].length){
+      currentText = texts[i].substring(0,j++);
+    } else if(isDeleting && j >= 0){
+      currentText = texts[i].substring(0,j--);
+    }
+
+    document.getElementById("typing").innerHTML = currentText;
+
+    if(j == texts[i].length){
+      isDeleting = true;
+      setTimeout(type,1000);
+      return;
+    }
+
+    if(j == 0){
+      isDeleting = false;
+      i++;
+    }
+  }
+
+  setTimeout(type, isDeleting ? 50 : 100);
+}
+
+type();
 </script>
 
 </body>
 </html>
-
-
